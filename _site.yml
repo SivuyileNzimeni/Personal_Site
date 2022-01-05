@@ -1,0 +1,18 @@
+name: "Personal Site"
+title: "Sivuyile Nzimeni"
+description: |
+  
+output_dir: "_site"
+navbar:
+ right:
+    - text: "Home"
+      href: index.html
+    - text: "Posts"
+      menu: 
+        - text: "Ask A Manager Survey"
+          href: Ask_A_Manager_Survey.html
+        - text: "Scraping DBE School Data"
+          href: Scrape_DBE.html
+        - text: "State of Capture Part 1: Notes"
+          href: State_Capture_One.html
+output: distill::distill_article
