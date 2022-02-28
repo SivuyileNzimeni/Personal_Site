@@ -15,4 +15,6 @@ navbar:
           href: Scrape_DBE.html
         - text: "State of Capture Part 1: Notes"
           href: State_Capture_One.html
+        - text: "South African Car Prices"
+          href: Cars_SA.html
 output: distill::distill_article
