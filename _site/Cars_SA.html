@@ -2114,7 +2114,7 @@ Posts
 <h3>Contents</h3>
 <ul>
 <li><a href="#introduction">INTRODUCTION</a></li>
-<li><a href="#web-scraping">Web SCRAPING</a>
+<li><a href="#web-scraping">WEB SCRAPING</a>
 <ul>
 <li><a href="#importing-the-data">IMPORTING THE DATA</a></li>
 <li><a href="#data-preprocessing">DATA PREPROCESSING</a></li>
@@ -2129,7 +2129,7 @@ Posts
 </div>
 <h1 id="introduction">INTRODUCTION</h1>
 <p>South Africa has a plethora of online vehicle marketplaces. Often, their pool of vehicles for sale are usually &gt; 50 000 on a daily basis. The vehicle listings offer a vast amount of car related data. Naturally, web-scraping the data provides an opportunity to fit a Machine-Learning model and endless exploration for petrol-heads (such as myself). Nearly all the online vehicle marketplaces have restrictive Terms and Conditions deterring the use of their data for commercial purposes and bombarding of their servers through web scrapping among other restrictions. Unfortunately, this means web scraping script cannot be shared in this post as it may reveal where the data were obtained, methodology of scraping the data etc. In addition, the website of the online vehicle marketplace will not be revealed.</p>
-<h1 id="web-scraping">Web SCRAPING</h1>
+<h1 id="web-scraping">WEB SCRAPING</h1>
 <p>To respect the Terms of Conditions, the scraping was throttled through the use of base R’s <code>rpois</code> function along with the <code>Sys.sleep()</code> function. Combining the two functions results in non-normal distribution of system sleep. System sleep essentially pauses R for the specified period. This step in the scrapping process is important to avoid sending to many requests to a website, perhaps, hoarding server capacity for other users. In this instance,scrapping all the webpages and pulling all listed vehicles on the day(2021-09-02), took 10 hours.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2292,7 +2292,7 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>.metric</span> <span class='op'>==</span> <span class='st'>"rsq"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>id</span>,<span class='va'>.metric</span>,<span class='va'>.estimator</span>,<span class='va'>.estimate</span><span class='op'>)</span>
 
-<span class='va'>cv_outcomes</span> <span class='op'>%&gt;%</span>  
+<span class='va'>cv_plot</span> <span class='op'>&lt;-</span> <span class='va'>cv_outcomes</span> <span class='op'>%&gt;%</span>  
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>id</span>,<span class='va'>.estimate</span>,group<span class='op'>=</span><span class='fl'>1</span>,fill<span class='op'>=</span><span class='va'>id</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span>,alpha<span class='op'>=</span><span class='fl'>0.8</span><span class='op'>)</span><span class='op'>+</span>
   <span class='fu'>geom_text</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>.estimate</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
@@ -2307,12 +2307,9 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
                                      hjust <span class='op'>=</span> <span class='fl'>0.5</span>,face <span class='op'>=</span> <span class='st'>"italic"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure">
-<img src="Cars_SA_files/figure-html5/Cross_Validation-1.png" alt="A bar plot containing cross-validated r-squares across 10 folds with an average of 0.63" width="566.92896" />
-<p class="caption">
-(#fig:Cross_Validation)A bar plot containing cross-validated r-squares across 10 folds with an average of 0.63
-</p>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="Cars_SA_files/figure-html5/View_Results-1.png" width="566.92896" /></p>
 </div>
 <h1 id="testing-performance-of-a-out-of-sample-set">TESTING PERFORMANCE OF A OUT-OF-SAMPLE SET</h1>
 <p>Our model had an mean r-square of 0.62. Indicating that 62% of the variation in vehicle prices is explained by the variables in our dataset. To test whether the r-square remains stable on an unseen dataset, we fit the model to our test sample. The table below illustrates the results of linear regression below.</p>

@@ -33,7 +33,7 @@ set.seed(57971)
 
 South Africa has a plethora of online vehicle marketplaces. Often, their pool of vehicles for sale are usually > 50 000 on a daily basis. The vehicle listings offer a vast amount of car related data. Naturally, web-scraping the data provides an opportunity to fit a Machine-Learning model and endless exploration for petrol-heads (such as myself). Nearly all the online vehicle marketplaces have restrictive Terms and Conditions deterring the use of their data for commercial purposes and bombarding of their servers through web scrapping among other restrictions. Unfortunately, this means web scraping script cannot be shared in this post as it may reveal where the data were obtained, methodology of scraping the data etc. In addition, the website of the online vehicle marketplace will not be revealed. 
 
-# Web SCRAPING
+# WEB SCRAPING
 
 To respect the Terms of Conditions, the scraping was throttled through the use of base R's `rpois` function along with the `Sys.sleep()` function. Combining the two functions results in non-normal distribution of system sleep. System sleep essentially pauses R for the specified period. This step in the scrapping process is important to avoid sending to many requests to a website, perhaps, hoarding server capacity for other users. In this instance,scrapping all the webpages and pulling all listed vehicles on the day(2021-09-02), took 10 hours. 
 
@@ -178,7 +178,7 @@ cv_outcomes <- workflow() %>%
   filter(.metric == "rsq") %>% 
   select(id,.metric,.estimator,.estimate)
 
-cv_outcomes %>%  
+cv_plot <- cv_outcomes %>%  
   ggplot(aes(id,.estimate,group=1,fill=id))+
   geom_col(show.legend = FALSE,alpha=0.8)+
   geom_text(aes(label=round(.estimate,2)))+
@@ -192,6 +192,11 @@ cv_outcomes %>%
         plot.subtitle = element_text(family = "Arial Narrow",
                                      hjust = 0.5,face = "italic"))
 ```
+
+```{r View_Results,fig.width=5.90551,fig.height=7.87402,echo=FALSE}
+cv_plot
+```
+
 
 # TESTING PERFORMANCE OF A OUT-OF-SAMPLE SET
 Our model had an mean r-square of 0.62. Indicating that 62% of the variation in vehicle prices is explained by the variables in our dataset. To test whether the r-square remains stable on an unseen dataset, we fit the model to our test sample. The table below illustrates the results of linear regression below. 
