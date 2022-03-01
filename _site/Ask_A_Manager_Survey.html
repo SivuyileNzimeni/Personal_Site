@@ -2083,6 +2083,7 @@ Posts
 <a href="Ask_A_Manager_Survey.html">Ask A Manager Survey</a>
 <a href="Scrape_DBE.html">Scraping DBE School Data</a>
 <a href="State_Capture_One.html">State of Capture Part 1: Notes</a>
+<a href="Cars_SA.html">South African Car Prices</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2218,7 +2219,7 @@ Posts
 <pre><code># A tibble: 1 × 1
   avg_estimate
          &lt;dbl&gt;
-1        0.271</code></pre>
+1        0.269</code></pre>
 </div>
 <p>Across all 10 validation folds, the linear regression model’s adjusted R-square averaged 0.272. It is possible to tune the parameters and use battery of other machine learning models to improve performance. In the previous post, we utilised random forest to try an improve the model. Despite, requiring additional computational power, the increases in peformance were marginal to neglible.</p>
 <p>At this point, we have completed our first objective. We are able to reproduce the LASSO regresison results in the previous post. The next objective is to determine the parsimony of the model. Here, we fit model on the test data.</p>
@@ -2237,7 +2238,7 @@ Posts
 <h1 id="results">RESULTS</h1>
 <h3 id="training-dataset">Training Dataset</h3>
 <div class="layout-chunk" data-layout="l-body">
-<div id="cuazlgcvsi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qesgnpbkeh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2245,7 +2246,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#cuazlgcvsi .gt_table {
+#qesgnpbkeh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2270,7 +2271,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_heading {
+#qesgnpbkeh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2282,33 +2283,37 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_title {
+#qesgnpbkeh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
 
-#cuazlgcvsi .gt_subtitle {
+#qesgnpbkeh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#cuazlgcvsi .gt_bottom_border {
+#qesgnpbkeh .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_col_headings {
+#qesgnpbkeh .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2323,7 +2328,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_col_heading {
+#qesgnpbkeh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2343,7 +2348,7 @@ html {
   overflow-x: hidden;
 }
 
-#cuazlgcvsi .gt_column_spanner_outer {
+#qesgnpbkeh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,15 +2360,15 @@ html {
   padding-right: 4px;
 }
 
-#cuazlgcvsi .gt_column_spanner_outer:first-child {
+#qesgnpbkeh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cuazlgcvsi .gt_column_spanner_outer:last-child {
+#qesgnpbkeh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cuazlgcvsi .gt_column_spanner {
+#qesgnpbkeh .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -2375,8 +2380,11 @@ html {
   width: 100%;
 }
 
-#cuazlgcvsi .gt_group_heading {
-  padding: 8px;
+#qesgnpbkeh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2397,7 +2405,7 @@ html {
   vertical-align: middle;
 }
 
-#cuazlgcvsi .gt_empty_group_heading {
+#qesgnpbkeh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2412,15 +2420,15 @@ html {
   vertical-align: middle;
 }
 
-#cuazlgcvsi .gt_from_md > :first-child {
+#qesgnpbkeh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cuazlgcvsi .gt_from_md > :last-child {
+#qesgnpbkeh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cuazlgcvsi .gt_row {
+#qesgnpbkeh .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2439,7 +2447,7 @@ html {
   overflow-x: hidden;
 }
 
-#cuazlgcvsi .gt_stub {
+#qesgnpbkeh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2448,10 +2456,29 @@ html {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#cuazlgcvsi .gt_summary_row {
+#qesgnpbkeh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qesgnpbkeh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qesgnpbkeh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2461,17 +2488,26 @@ html {
   padding-right: 5px;
 }
 
-#cuazlgcvsi .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
+#qesgnpbkeh .gt_first_summary_row {
   border-top-style: solid;
-  border-top-width: 2px;
   border-top-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_grand_summary_row {
+#qesgnpbkeh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qesgnpbkeh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qesgnpbkeh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2481,7 +2517,7 @@ html {
   padding-right: 5px;
 }
 
-#cuazlgcvsi .gt_first_grand_summary_row {
+#qesgnpbkeh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2491,11 +2527,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_striped {
+#qesgnpbkeh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cuazlgcvsi .gt_table_body {
+#qesgnpbkeh .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2504,7 +2540,7 @@ html {
   border-bottom-color: #FFFFFF;
 }
 
-#cuazlgcvsi .gt_footnotes {
+#qesgnpbkeh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2518,13 +2554,16 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_footnote {
+#qesgnpbkeh .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#cuazlgcvsi .gt_sourcenotes {
+#qesgnpbkeh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2538,44 +2577,71 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cuazlgcvsi .gt_sourcenote {
+#qesgnpbkeh .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#cuazlgcvsi .gt_left {
+#qesgnpbkeh .gt_left {
   text-align: left;
 }
 
-#cuazlgcvsi .gt_center {
+#qesgnpbkeh .gt_center {
   text-align: center;
 }
 
-#cuazlgcvsi .gt_right {
+#qesgnpbkeh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cuazlgcvsi .gt_font_normal {
+#qesgnpbkeh .gt_font_normal {
   font-weight: normal;
 }
 
-#cuazlgcvsi .gt_font_bold {
+#qesgnpbkeh .gt_font_bold {
   font-weight: bold;
 }
 
-#cuazlgcvsi .gt_font_italic {
+#qesgnpbkeh .gt_font_italic {
   font-style: italic;
 }
 
-#cuazlgcvsi .gt_super {
+#qesgnpbkeh .gt_super {
   font-size: 65%;
 }
 
-#cuazlgcvsi .gt_footnote_marks {
+#qesgnpbkeh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
-  font-size: 65%;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#qesgnpbkeh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qesgnpbkeh .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#qesgnpbkeh .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#qesgnpbkeh .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -2594,149 +2660,132 @@ html {
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">(Intercept)</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">11***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">(Intercept)</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">11***
 (0.022)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X21...30.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.40***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X21...30.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.40***
 (0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_director</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.31***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_director</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.31***
 (0.013)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X11...20.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.30***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X11...20.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.30***
 (0.019)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_computing</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.28
-(0.215)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_PhD</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.26***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_PhD</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.27***
 (0.017)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">city_york</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.26***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">city_york</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.26***
 (0.016)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_government</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.26**
-(0.086)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X8...10.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.25***
-(0.019)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_engineer</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.23***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X8...10.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.24***
+(0.020)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_engineer</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.23***
 (0.016)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_senior</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.15***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_government</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.19*
+(0.082)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_tech</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.26
+(0.197)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_senior</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.16***
 (0.012)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X5.7.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.15***
-(0.018)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_manager</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.12***
-(0.010)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X45.54</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.11***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X5.7.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.14***
 (0.019)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X35.44</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.11***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X45.54</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.12***
+(0.019)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_computing</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.03
+(0.197)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X35.44</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.12***
 (0.018)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_engineering</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.08***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_manager</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.11***
+(0.010)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_health</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.14
+(0.084)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_engineering</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.08***
 (0.017)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_finance</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.25
-(0.196)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X25.34</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.07***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_administration</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.08
+(0.090)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_finance</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.33
+(0.216)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X25.34</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.07***
 (0.017)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_health</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.06
-(0.088)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_Master.s.degree</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.04***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_analyst</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.04**
+(0.015)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_Master.s.degree</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.04***
 (0.008)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_administration</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.04
-(0.093)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_analyst</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.03*
-(0.015)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_care</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.02
-(0.088)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X2...4.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.03
-(0.018)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_tech</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.00
-(0.215)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_accounting</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.10
-(0.487)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_banking</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.29
-(0.525)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">gender_Woman</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.03**
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X2...4.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.03
+(0.019)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_banking</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.27
+(0.216)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_care</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.06
+(0.084)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">gender_Woman</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.03**
 (0.009)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X21...30.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.13***
-(0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">race_White</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.12***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">race_White</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.11***
 (0.010)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X11...20.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.13***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X8...10.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.12***
+(0.023)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X11...20.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.13***
 (0.022)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X8...10.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.14***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X21...30.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.13***
 (0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X5.7.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.17***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X5.7.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.16***
 (0.024)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_education</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.19***
-(0.012)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_nonprofits</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.19***
-(0.014)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X2...4.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.20***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X2...4.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.18***
 (0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_Some.college</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.21***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_nonprofits</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.18***
 (0.014)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_assistant</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.22***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_education</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.18***
+(0.013)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_assistant</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.22***
 (0.015)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_public</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.26***
-(0.050)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_Some.college</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.22***
+(0.014)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_public</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.24***
+(0.053)</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
       <td class="gt_sourcenote" colspan="2">Adjusted R-square: 0.2732</td>
     </tr>
   </tfoot>
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="2">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          *p&lt;0.05; **p&lt;0.01; ***p&lt;0.001
-          <br />
-        </p>
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>2</em>
-          </sup>
-           
-          SE = Standard Error
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><sup class="gt_footnote_marks">1</sup> *p&lt;0.05; **p&lt;0.01; ***p&lt;0.001</td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="2"><sup class="gt_footnote_marks">2</sup> SE = Standard Error</td>
     </tr>
   </tfoot>
 </table>
@@ -2744,7 +2793,7 @@ html {
 </div>
 <h3 id="test-dataset">Test Dataset</h3>
 <div class="layout-chunk" data-layout="l-body">
-<div id="vfyuzzmfso" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ljiaojwlkk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2752,7 +2801,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vfyuzzmfso .gt_table {
+#ljiaojwlkk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2777,7 +2826,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_heading {
+#ljiaojwlkk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2789,33 +2838,37 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_title {
+#ljiaojwlkk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
 
-#vfyuzzmfso .gt_subtitle {
+#ljiaojwlkk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#vfyuzzmfso .gt_bottom_border {
+#ljiaojwlkk .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_col_headings {
+#ljiaojwlkk .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2830,7 +2883,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_col_heading {
+#ljiaojwlkk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2850,7 +2903,7 @@ html {
   overflow-x: hidden;
 }
 
-#vfyuzzmfso .gt_column_spanner_outer {
+#ljiaojwlkk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2862,15 +2915,15 @@ html {
   padding-right: 4px;
 }
 
-#vfyuzzmfso .gt_column_spanner_outer:first-child {
+#ljiaojwlkk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vfyuzzmfso .gt_column_spanner_outer:last-child {
+#ljiaojwlkk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vfyuzzmfso .gt_column_spanner {
+#ljiaojwlkk .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 1px;
   border-bottom-color: #334422;
@@ -2882,8 +2935,11 @@ html {
   width: 100%;
 }
 
-#vfyuzzmfso .gt_group_heading {
-  padding: 8px;
+#ljiaojwlkk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2904,7 +2960,7 @@ html {
   vertical-align: middle;
 }
 
-#vfyuzzmfso .gt_empty_group_heading {
+#ljiaojwlkk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2919,15 +2975,15 @@ html {
   vertical-align: middle;
 }
 
-#vfyuzzmfso .gt_from_md > :first-child {
+#ljiaojwlkk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vfyuzzmfso .gt_from_md > :last-child {
+#ljiaojwlkk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vfyuzzmfso .gt_row {
+#ljiaojwlkk .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2946,7 +3002,7 @@ html {
   overflow-x: hidden;
 }
 
-#vfyuzzmfso .gt_stub {
+#ljiaojwlkk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2955,10 +3011,29 @@ html {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#vfyuzzmfso .gt_summary_row {
+#ljiaojwlkk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ljiaojwlkk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ljiaojwlkk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2968,17 +3043,26 @@ html {
   padding-right: 5px;
 }
 
-#vfyuzzmfso .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
+#ljiaojwlkk .gt_first_summary_row {
   border-top-style: solid;
-  border-top-width: 2px;
   border-top-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_grand_summary_row {
+#ljiaojwlkk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ljiaojwlkk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ljiaojwlkk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2988,7 +3072,7 @@ html {
   padding-right: 5px;
 }
 
-#vfyuzzmfso .gt_first_grand_summary_row {
+#ljiaojwlkk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2998,11 +3082,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_striped {
+#ljiaojwlkk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vfyuzzmfso .gt_table_body {
+#ljiaojwlkk .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3011,7 +3095,7 @@ html {
   border-bottom-color: #FFFFFF;
 }
 
-#vfyuzzmfso .gt_footnotes {
+#ljiaojwlkk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3025,13 +3109,16 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_footnote {
+#ljiaojwlkk .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#vfyuzzmfso .gt_sourcenotes {
+#ljiaojwlkk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3045,44 +3132,71 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vfyuzzmfso .gt_sourcenote {
+#ljiaojwlkk .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#vfyuzzmfso .gt_left {
+#ljiaojwlkk .gt_left {
   text-align: left;
 }
 
-#vfyuzzmfso .gt_center {
+#ljiaojwlkk .gt_center {
   text-align: center;
 }
 
-#vfyuzzmfso .gt_right {
+#ljiaojwlkk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vfyuzzmfso .gt_font_normal {
+#ljiaojwlkk .gt_font_normal {
   font-weight: normal;
 }
 
-#vfyuzzmfso .gt_font_bold {
+#ljiaojwlkk .gt_font_bold {
   font-weight: bold;
 }
 
-#vfyuzzmfso .gt_font_italic {
+#ljiaojwlkk .gt_font_italic {
   font-style: italic;
 }
 
-#vfyuzzmfso .gt_super {
+#ljiaojwlkk .gt_super {
   font-size: 65%;
 }
 
-#vfyuzzmfso .gt_footnote_marks {
+#ljiaojwlkk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
-  font-size: 65%;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#ljiaojwlkk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ljiaojwlkk .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#ljiaojwlkk .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#ljiaojwlkk .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -3101,148 +3215,132 @@ html {
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">(Intercept)</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">11***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">(Intercept)</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">11***
+(0.039)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X21...30.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.39***
 (0.040)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X21...30.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.38***
-(0.042)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_director</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.35***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_director</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.35***
 (0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X11...20.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.28***
-(0.035)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_computing</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.08
-(0.247)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_PhD</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.27***
-(0.030)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">city_york</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.23***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X11...20.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.26***
+(0.033)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_PhD</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.24***
 (0.029)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_government</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.27*
-(0.121)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X8...10.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.19***
-(0.035)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_engineer</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.25***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">city_york</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.22***
 (0.028)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_senior</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.19***
-(0.021)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X5.7.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.11**
-(0.034)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_manager</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.11***
-(0.017)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X45.54</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.09**
-(0.036)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X35.44</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.09**
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X8...10.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.21***
 (0.033)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_engineering</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.08**
-(0.030)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_finance</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.29
-(0.349)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">how_old_are_you_X25.34</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.05
-(0.031)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_health</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.29*
-(0.123)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_Master.s.degree</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.03*
-(0.015)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_administration</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.07
-(0.138)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_analyst</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.08**
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_engineer</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.27***
 (0.027)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_care</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.22
-(0.124)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">years_of_experience_in_field_X2...4.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.01
-(0.033)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_tech</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">0.35
-(0.247)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_accounting</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.25
-(0.350)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_banking</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;"></td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">gender_Woman</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.04*
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_government</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.48***
+(0.133)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_tech</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.04
+(0.281)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_senior</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.14***
+(0.020)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X5.7.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.13***
+(0.032)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X45.54</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.07
+(0.035)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_computing</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.30
+(0.281)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X35.44</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.06*
+(0.032)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_manager</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.14***
+(0.017)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_health</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.19
+(0.128)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_engineering</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.10**
+(0.029)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_administration</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.20
+(0.142)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_finance</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.11
+(0.279)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">how_old_are_you_X25.34</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.04
+(0.030)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_analyst</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.05
+(0.027)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_Master.s.degree</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.04**
+(0.014)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">years_of_experience_in_field_X2...4.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">0.01
+(0.031)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_banking</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.08
+(0.280)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_care</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.13
+(0.128)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">gender_Woman</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.04**
 (0.016)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X21...30.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.09*
-(0.041)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">race_White</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.10***
-(0.018)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X11...20.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.07
-(0.041)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X8...10.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.09*
-(0.042)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X5.7.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.12**
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">race_White</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.12***
+(0.017)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X8...10.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.12**
 (0.043)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_education</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.19***
-(0.023)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_nonprofits</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.19***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X11...20.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.07
+(0.041)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X21...30.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.08
+(0.041)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X5.7.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.13**
+(0.043)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">overall_years_of_professional_experience_X2...4.years</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.22***
+(0.041)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_nonprofits</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.20***
 (0.024)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">overall_years_of_professional_experience_X2...4.years</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.16***
-(0.042)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">highest_level_of_education_completed_Some.college</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.21***
-(0.024)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">job_title_assistant</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.21***
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_education</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.20***
+(0.022)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">job_title_assistant</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.22***
 (0.026)</td></tr>
-    <tr><td class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">industry_public</td>
-<td class="gt_row gt_center" style="font-family: 'Source Sans Pro'; font-weight: 400;">-0.18
-(0.104)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">highest_level_of_education_completed_Some.college</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.18***
+(0.025)</td></tr>
+    <tr><td class="gt_row gt_left" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">industry_public</td>
+<td class="gt_row gt_center" style="font-family: &#39;Source Sans Pro&#39;; font-weight: 400;">-0.24**
+(0.089)</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
       <td class="gt_sourcenote" colspan="2">Adjusted R-square: 0.2624</td>
     </tr>
   </tfoot>
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="2">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          *p&lt;0.05; **p&lt;0.01; ***p&lt;0.001
-          <br />
-        </p>
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>2</em>
-          </sup>
-           
-          SE = Standard Error
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><sup class="gt_footnote_marks">1</sup> *p&lt;0.05; **p&lt;0.01; ***p&lt;0.001</td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="2"><sup class="gt_footnote_marks">2</sup> SE = Standard Error</td>
     </tr>
   </tfoot>
 </table>
