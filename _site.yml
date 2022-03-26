@@ -1,5 +1,6 @@
 name: "Personal Site"
 title: "Sivuyile Nzimeni"
+theme: Sivu_Theme.css
 description: |
   
 output_dir: "_site"
