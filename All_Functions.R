@@ -2,7 +2,7 @@
 sivu_is_a_lib <- function(){
   lapply(as.list(c("tidyverse","janitor",
                    "readxl","writexl","glue",
-                   "ggthemes")),
+                   "ggthemes","arrow")),
          require,character.only=TRUE)
   theme_set(theme_clean())
 }

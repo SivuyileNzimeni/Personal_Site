@@ -18,4 +18,6 @@ navbar:
           href: State_Capture_One.html
         - text: "South African Car Prices"
           href: Cars_SA.html
+        - text: "Twitter Sentiment Classification"
+          href: Twitter_Sentiment.html
 output: distill::distill_article
