@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -1034,10 +1035,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 1.5em;
   }
 
-  .figure img {
-    width: 100%;
-  }
-
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
@@ -1867,6 +1864,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1881,6 +1884,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1980,6 +2008,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -2002,7 +2032,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2282,7 +2312,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--hover-color, white);
   }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2325,6 +2355,7 @@ Posts
 <a href="Scrape_DBE.html">Scraping DBE School Data</a>
 <a href="State_Capture_One.html">State of Capture Part 1: Notes</a>
 <a href="Cars_SA.html">South African Car Prices</a>
+<a href="Food_Prices.html">South African Food Prices</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2339,7 +2370,10 @@ Posts
 <h1>South African Car Prices</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>This post details the data scraping process for obtaining data from a South African online vehicle marketplate. In addition, the post shares the results of a linear regression model to estimate determinants of vehicle prices.</p></p>
+<p><p>This post details the data scraping process for obtaining data
+from a South African online vehicle marketplate. In addition, the post
+shares the results of a linear regression model to estimate determinants
+of vehicle prices.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2359,19 +2393,40 @@ Posts
 <ul>
 <li><a href="#importing-the-data">IMPORTING THE DATA</a></li>
 <li><a href="#data-preprocessing">DATA PREPROCESSING</a></li>
-<li><a href="#lasso-it-once-lasso-it-until-you-can-also-no-more">LASSO IT ONCE, LASSO IT UNTIL YOU CAN ALSO NO MORE</a></li>
+<li><a href="#lasso-it-once-lasso-it-until-you-can-also-no-more">LASSO
+IT ONCE, LASSO IT UNTIL YOU CAN ALSO NO MORE</a></li>
 <li><a href="#cross-validation">CROSS VALIDATION</a></li>
 </ul></li>
-<li><a href="#testing-performance-of-a-out-of-sample-set">TESTING PERFORMANCE OF A OUT-OF-SAMPLE SET</a></li>
+<li><a href="#testing-performance-of-a-out-of-sample-set">TESTING
+PERFORMANCE OF A OUT-OF-SAMPLE SET</a></li>
 <li><a href="#conclusion">CONCLUSION</a></li>
 <li><a href="#reference">REFERENCE</a></li>
 </ul>
 </nav>
 </div>
 <h1 id="introduction">INTRODUCTION</h1>
-<p>South Africa has a plethora of online vehicle marketplaces. Often, their pool of vehicles for sale are usually &gt; 50 000 on a daily basis. The vehicle listings offer a vast amount of car related data. Naturally, web-scraping the data provides an opportunity to fit a Machine-Learning model and endless exploration for petrol-heads (such as myself). Nearly all the online vehicle marketplaces have restrictive Terms and Conditions deterring the use of their data for commercial purposes and bombarding of their servers through web scrapping among other restrictions. Unfortunately, this means web scraping script cannot be shared in this post as it may reveal where the data were obtained, methodology of scraping the data etc. In addition, the website of the online vehicle marketplace will not be revealed.</p>
+<p>South Africa has a plethora of online vehicle marketplaces. Often,
+their pool of vehicles for sale are usually &gt; 50 000 on a daily
+basis. The vehicle listings offer a vast amount of car related data.
+Naturally, web-scraping the data provides an opportunity to fit a
+Machine-Learning model and endless exploration for petrol-heads (such as
+myself). Nearly all the online vehicle marketplaces have restrictive
+Terms and Conditions deterring the use of their data for commercial
+purposes and bombarding of their servers through web scrapping among
+other restrictions. Unfortunately, this means web scraping script cannot
+be shared in this post as it may reveal where the data were obtained,
+methodology of scraping the data etc. In addition, the website of the
+online vehicle marketplace will not be revealed.</p>
 <h1 id="web-scraping">WEB SCRAPING</h1>
-<p>To respect the Terms of Conditions, the scraping was throttled through the use of base R’s <code>rpois</code> function along with the <code>Sys.sleep()</code> function. Combining the two functions results in non-normal distribution of system sleep. System sleep essentially pauses R for the specified period. This step in the scrapping process is important to avoid sending to many requests to a website, perhaps, hoarding server capacity for other users. In this instance,scrapping all the webpages and pulling all listed vehicles on the day(2021-09-02), took 10 hours.</p>
+<p>To respect the Terms of Conditions, the scraping was throttled
+through the use of base R’s <code>rpois</code> function along with the
+<code>Sys.sleep()</code> function. Combining the two functions results
+in non-normal distribution of system sleep. System sleep essentially
+pauses R for the specified period. This step in the scrapping process is
+important to avoid sending to many requests to a website, perhaps,
+hoarding server capacity for other users. In this instance,scrapping all
+the webpages and pulling all listed vehicles on the day(2021-09-02),
+took 10 hours.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pause</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span><span class='op'>{</span>
@@ -2382,7 +2437,13 @@ Posts
 </div>
 </div>
 <h2 id="importing-the-data">IMPORTING THE DATA</h2>
-<p>Below, we import the data and use <code>dplyr::glimpse</code> function to see the number of columns and values. The dataset contains a few important variables including the car_name and vehicle manufacturer. It is worth noting that the car_name variable appears to a free text field where the person listing the vehicle can modify the car name to include marketing terms such as: “excellent condition”,“reduce price” etc.</p>
+<p>Below, we import the data and use <code>dplyr::glimpse</code>
+function to see the number of columns and values. The dataset contains a
+few important variables including the car_name and vehicle manufacturer.
+It is worth noting that the car_name variable appears to a free text
+field where the person listing the vehicle can modify the car name to
+include marketing terms such as: “excellent condition”,“reduce price”
+etc.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Car_Data</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span><span class='st'>"./2021-09-03_MANY_VEHICLES_Clean_Db.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -2404,7 +2465,10 @@ $ dealership           &lt;chr&gt; &quot;Mahala Motors&quot;, &quot;WeBuyCars Mi
 $ city_town            &lt;chr&gt; &quot;Klerksdorp&quot;, &quot;Centurion&quot;, &quot;Cape Town&quot;,…
 $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauteng&quot;, &quot;West…</code></pre>
 </div>
-<p>Similarly, the free text field, also means that vehicle naming conventions deviate from the vehicle manufacturer specifications. Other text variables also contain these anomalous changes in text. The code below demonstrates an example of idiosyncrasies.</p>
+<p>Similarly, the free text field, also means that vehicle naming
+conventions deviate from the vehicle manufacturer specifications. Other
+text variables also contain these anomalous changes in text. The code
+below demonstrates an example of idiosyncrasies.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Car_Data</span> <span class='op'>%&gt;%</span> 
@@ -2422,7 +2486,18 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
 #   city_town &lt;chr&gt;, province &lt;chr&gt;</code></pre>
 </div>
 <h2 id="data-preprocessing">DATA PREPROCESSING</h2>
-<p>We would like to fit a model to better understand the determinants of vehicle prices. Here, pre-processing is important is especially important. <code>Tidymodels</code> and the <code>textrecipes</code> offer a range of functions to handle the whole modelling workflow. Below, are a number of pre-processing steps, firstly we use the <code>unnest_tokens</code> function from the <code>tidytext package</code> to process the the <code>car_name</code> variable. Thereafter, we handle the numerical values by applying a logarithm to outcome variable and standardising mileage. Finally, we use <code>step_tokenize</code>, <code>step_tokenfilter</code> and <code>step_tf</code> to tokenise, filter the those tokens and ultimately convert the tokens to a term frequency variables.</p>
+<p>We would like to fit a model to better understand the determinants of
+vehicle prices. Here, pre-processing is important is especially
+important. <code>Tidymodels</code> and the <code>textrecipes</code>
+offer a range of functions to handle the whole modelling workflow.
+Below, are a number of pre-processing steps, firstly we use the
+<code>unnest_tokens</code> function from the
+<code>tidytext package</code> to process the the <code>car_name</code>
+variable. Thereafter, we handle the numerical values by applying a
+logarithm to outcome variable and standardising mileage. Finally, we use
+<code>step_tokenize</code>, <code>step_tokenfilter</code> and
+<code>step_tf</code> to tokenise, filter the those tokens and ultimately
+convert the tokens to a term frequency variables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Useful_Car_Names</span> <span class='op'>&lt;-</span> <span class='va'>Car_Data</span> <span class='op'>%&gt;%</span> 
@@ -2467,8 +2542,15 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
 </code></pre>
 </div>
 </div>
-<h2 id="lasso-it-once-lasso-it-until-you-can-also-no-more">LASSO IT ONCE, LASSO IT UNTIL YOU CAN ALSO NO MORE</h2>
-<p>The resulting dataset contains 59417 rows across 27 variables. Given the dimension above, it prudent to do some additional feature select. LASSO regression helps with variable selection. In turn, we use the LASSO regression results to filter for the appropriate variables. The final variable set yields 24 predictor variables. The code below contains all details the LASSO implementation and subsequent filtering.</p>
+<h2 id="lasso-it-once-lasso-it-until-you-can-also-no-more">LASSO IT
+ONCE, LASSO IT UNTIL YOU CAN ALSO NO MORE</h2>
+<p>The resulting dataset contains 59417 rows across 27 variables. Given
+the dimension above, it prudent to do some additional feature select.
+LASSO regression helps with variable selection. In turn, we use the
+LASSO regression results to filter for the appropriate variables. The
+final variable set yields 24 predictor variables. The code below
+contains all details the LASSO implementation and subsequent
+filtering.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>New_Car_Data</span> <span class='op'>&lt;-</span> <span class='va'>New_Car_Data</span> <span class='op'>%&gt;%</span>
@@ -2514,9 +2596,18 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
 </div>
 </div>
 <h2 id="cross-validation">CROSS VALIDATION</h2>
-<p>Before fitting to the test dataset, it worth investigating whether our model performs well against “shuffled” dataset of our training data. Fortunately, <code>tidymodels</code> and <code>parsnip</code> contain several functions to assist with the exercise.</p>
-<p>Here, we use the <code>vfold_cv</code> function to split our training data into random splits of equal size. Next, we use <code>workflow</code> to fit a linear model on the random splits. Subsequently, we plot the r-squares across all the folds.</p>
-<p>Ultimately, cross validation helps us understand the performance of our model set of datasets by iterating through the training and test sample of each fold. The code below illustrates an implementation of cross validation.</p>
+<p>Before fitting to the test dataset, it worth investigating whether
+our model performs well against “shuffled” dataset of our training data.
+Fortunately, <code>tidymodels</code> and <code>parsnip</code> contain
+several functions to assist with the exercise.</p>
+<p>Here, we use the <code>vfold_cv</code> function to split our training
+data into random splits of equal size. Next, we use
+<code>workflow</code> to fit a linear model on the random splits.
+Subsequently, we plot the r-squares across all the folds.</p>
+<p>Ultimately, cross validation helps us understand the performance of
+our model set of datasets by iterating through the training and test
+sample of each fold. The code below illustrates an implementation of
+cross validation.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Car_Training_cv</span> <span class='op'>&lt;-</span> <span class='fu'>vfold_cv</span><span class='op'>(</span><span class='va'>Car_Training</span><span class='op'>)</span>
@@ -2552,8 +2643,13 @@ $ province             &lt;chr&gt; &quot;North West Province&quot;, &quot;Gauten
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="Cars_SA_files/figure-html5/View_Results-1.png" width="566.92896" /></p>
 </div>
-<h1 id="testing-performance-of-a-out-of-sample-set">TESTING PERFORMANCE OF A OUT-OF-SAMPLE SET</h1>
-<p>Our model had an mean r-square of 0.62. Indicating that 62% of the variation in vehicle prices is explained by the variables in our dataset. To test whether the r-square remains stable on an unseen dataset, we fit the model to our test sample. The table below illustrates the results of linear regression below.</p>
+<h1 id="testing-performance-of-a-out-of-sample-set">TESTING PERFORMANCE
+OF A OUT-OF-SAMPLE SET</h1>
+<p>Our model had an mean r-square of 0.62. Indicating that 62% of the
+variation in vehicle prices is explained by the variables in our
+dataset. To test whether the r-square remains stable on an unseen
+dataset, we fit the model to our test sample. The table below
+illustrates the results of linear regression below.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table style="border-collapse:collapse; border:none;">
 <tr>
@@ -3102,24 +3198,80 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 </tr>
 </table>
 </div>
-<p>According to the results above, statistically significant variables include the vehicle manufacturer, vehicle name,vehicle age,transmission_type and fuel_type. Top among these are Mercedes Benz, BMW,Toyota and Volkswagen. Vehicles with the terms such as: “tsi”,“double”,“cab”,“dr” and “auto”. Interesting, “tsi” is a fuel type designation among Volkswagen group vehicles. Similarly, “double” and “cab” usually denote the bakkie (pickup truck) segment in South Africa. Other vehicle segment key word is “dr” which usually indicate a coupe or two-door saloon vehicle.</p>
+<p>According to the results above, statistically significant variables
+include the vehicle manufacturer, vehicle name,vehicle
+age,transmission_type and fuel_type. Top among these are Mercedes Benz,
+BMW,Toyota and Volkswagen. Vehicles with the terms such as:
+“tsi”,“double”,“cab”,“dr” and “auto”. Interesting, “tsi” is a fuel type
+designation among Volkswagen group vehicles. Similarly, “double” and
+“cab” usually denote the bakkie (pickup truck) segment in South Africa.
+Other vehicle segment key word is “dr” which usually indicate a coupe or
+two-door saloon vehicle.</p>
 <h1 id="conclusion">CONCLUSION</h1>
-<p>In example, we have found the determinants of vehicle prices from the scraped dataset. The results are in line with vehicle sales in South Africa. Mercedes Benz, BMW, Toyota and Volkswagen, Ford and Hyundai vehicles constantly feature among top selling vehicles in South Africa. As expected, vehicle age and vehicle mileage are statistically significant factors that influence prices. To enhance the analysis, it may be worthwhile to scrape more variables such as vehicle description, listing date, options list, vehicle conditions and colour.</p>
+<p>In example, we have found the determinants of vehicle prices from the
+scraped dataset. The results are in line with vehicle sales in South
+Africa. Mercedes Benz, BMW, Toyota and Volkswagen, Ford and Hyundai
+vehicles constantly feature among top selling vehicles in South Africa.
+As expected, vehicle age and vehicle mileage are statistically
+significant factors that influence prices. To enhance the analysis, it
+may be worthwhile to scrape more variables such as vehicle description,
+listing date, options list, vehicle conditions and colour.</p>
 <h1 id="reference">REFERENCE</h1>
-<p>Wickham et al.,2019. Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a></p>
-<p>Sam Firke, 2021. janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.1.0. <a href="https://CRAN.R-project.org/package=janitor" class="uri">https://CRAN.R-project.org/package=janitor</a></p>
-<p>Hadley Wickham and Jennifer Bryan, 2019. readxl: Read Excel Files. R package version 1.3.1. <a href="https://CRAN.R-project.org/package=readxl" class="uri">https://CRAN.R-project.org/package=readxl</a></p>
-<p>Jeroen Ooms, 2021. writexl: Export Data Frames to Excel ‘xlsx’ Format. R package version 1.4.0. <a href="https://CRAN.R-project.org/package=writexl" class="uri">https://CRAN.R-project.org/package=writexl</a></p>
-<p>Jeffrey B. Arnold. 2021. ggthemes: Extra Themes, Scales and Geoms for ‘ggplot2’. R package version 4.2.4. <a href="https://CRAN.R-project.org/package=ggthemes" class="uri">https://CRAN.R-project.org/package=ggthemes</a></p>
-<p>Kuhn et al., 2020. Tidymodels: a collection of packages for modeling and machine learning using tidyverse principles. <a href="https://www.tidymodels.org" class="uri">https://www.tidymodels.org</a></p>
-<p>Emil Hvitfeldt. 2021. textrecipes: Extra ‘Recipes’ for Text Processing. R package version 0.4.1. <a href="https://CRAN.R-project.org/package=textrecipes" class="uri">https://CRAN.R-project.org/package=textrecipes</a></p>
-<p>Silge J, Robinson, D. 2016. “tidytext: Text Mining and Analysis Using Tidy Data Principles in R.” <em>JOSS</em>, <em>1</em>(3). doi: 10.21105/joss.00037. <a href="https://doi.org/10.21105/joss.00037" class="uri">https://doi.org/10.21105/joss.00037</a></p>
-<p>Jerome Friedman, Trevor Hastie, Robert Tibshirani. 2010. Regularization Paths for Generalized Linear Models via Coordinate Descent. Journal of Statistical Software, 33(1), 1-22. <a href="https://www.jstatsoft.org/v33/i01/" class="uri">https://www.jstatsoft.org/v33/i01/</a></p>
-<p>Julia Silge, Fanny Chow, Max Kuhn and Hadley Wickham. 2021. rsample: General Resampling Infrastructure. R package version 0.1.1. <a href="https://CRAN.R-project.org/package=rsample" class="uri">https://CRAN.R-project.org/package=rsample</a></p>
-<p>Max Kuhn and Davis Vaughan (2021). parsnip: A Common API to Modeling and Analysis Functions. <a href="https://parsnip.tidymodels.org" class="uri">https://parsnip.tidymodels.org</a>, <a href="https://github.com/tidymodels/parsnip" class="uri">https://github.com/tidymodels/parsnip</a></p>
-<p>Lüdecke D. 2021. <em>sjPlot: Data Visualization for Statistics in Social Science</em>. R package version 2.8.10. <a href="https://CRAN.R-project.org/package=sjPlot" class="uri">https://CRAN.R-project.org/package=sjPlot</a></p>
-<p>Lüdecke D. 2021. <em>sjlabelled: Labelled Data Utility Functions (Version 1.1.8)</em>. doi: 10.5281/zenodo.1249215. <a href="https://doi.org/10.5281/zenodo.1249215" class="uri">https://doi.org/10.5281/zenodo.1249215</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Wickham et al.,2019. Welcome to the tidyverse. Journal of Open Source
+Software, 4(43), 1686, <a href="https://doi.org/10.21105/joss.01686"
+class="uri">https://doi.org/10.21105/joss.01686</a></p>
+<p>Sam Firke, 2021. janitor: Simple Tools for Examining and Cleaning
+Dirty Data. R package version 2.1.0. <a
+href="https://CRAN.R-project.org/package=janitor"
+class="uri">https://CRAN.R-project.org/package=janitor</a></p>
+<p>Hadley Wickham and Jennifer Bryan, 2019. readxl: Read Excel Files. R
+package version 1.3.1. <a
+href="https://CRAN.R-project.org/package=readxl"
+class="uri">https://CRAN.R-project.org/package=readxl</a></p>
+<p>Jeroen Ooms, 2021. writexl: Export Data Frames to Excel ‘xlsx’
+Format. R package version 1.4.0. <a
+href="https://CRAN.R-project.org/package=writexl"
+class="uri">https://CRAN.R-project.org/package=writexl</a></p>
+<p>Jeffrey B. Arnold. 2021. ggthemes: Extra Themes, Scales and Geoms for
+‘ggplot2’. R package version 4.2.4. <a
+href="https://CRAN.R-project.org/package=ggthemes"
+class="uri">https://CRAN.R-project.org/package=ggthemes</a></p>
+<p>Kuhn et al., 2020. Tidymodels: a collection of packages for modeling
+and machine learning using tidyverse principles. <a
+href="https://www.tidymodels.org"
+class="uri">https://www.tidymodels.org</a></p>
+<p>Emil Hvitfeldt. 2021. textrecipes: Extra ‘Recipes’ for Text
+Processing. R package version 0.4.1. <a
+href="https://CRAN.R-project.org/package=textrecipes"
+class="uri">https://CRAN.R-project.org/package=textrecipes</a></p>
+<p>Silge J, Robinson, D. 2016. “tidytext: Text Mining and Analysis Using
+Tidy Data Principles in R.” <em>JOSS</em>, <em>1</em>(3). doi:
+10.21105/joss.00037. <a href="https://doi.org/10.21105/joss.00037"
+class="uri">https://doi.org/10.21105/joss.00037</a></p>
+<p>Jerome Friedman, Trevor Hastie, Robert Tibshirani. 2010.
+Regularization Paths for Generalized Linear Models via Coordinate
+Descent. Journal of Statistical Software, 33(1), 1-22. <a
+href="https://www.jstatsoft.org/v33/i01/"
+class="uri">https://www.jstatsoft.org/v33/i01/</a></p>
+<p>Julia Silge, Fanny Chow, Max Kuhn and Hadley Wickham. 2021. rsample:
+General Resampling Infrastructure. R package version 0.1.1. <a
+href="https://CRAN.R-project.org/package=rsample"
+class="uri">https://CRAN.R-project.org/package=rsample</a></p>
+<p>Max Kuhn and Davis Vaughan (2021). parsnip: A Common API to Modeling
+and Analysis Functions. <a href="https://parsnip.tidymodels.org"
+class="uri">https://parsnip.tidymodels.org</a>, <a
+href="https://github.com/tidymodels/parsnip"
+class="uri">https://github.com/tidymodels/parsnip</a></p>
+<p>Lüdecke D. 2021. <em>sjPlot: Data Visualization for Statistics in
+Social Science</em>. R package version 2.8.10. <a
+href="https://CRAN.R-project.org/package=sjPlot"
+class="uri">https://CRAN.R-project.org/package=sjPlot</a></p>
+<p>Lüdecke D. 2021. <em>sjlabelled: Labelled Data Utility Functions
+(Version 1.1.8)</em>. doi: 10.5281/zenodo.1249215. <a
+href="https://doi.org/10.5281/zenodo.1249215"
+class="uri">https://doi.org/10.5281/zenodo.1249215</a>.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

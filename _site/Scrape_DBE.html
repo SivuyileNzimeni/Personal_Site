@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -1034,10 +1035,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 1.5em;
   }
 
-  .figure img {
-    width: 100%;
-  }
-
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
@@ -1867,6 +1864,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1881,6 +1884,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1980,6 +2008,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -2002,7 +2032,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2282,7 +2312,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--hover-color, white);
   }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2325,6 +2355,7 @@ Posts
 <a href="Scrape_DBE.html">Scraping DBE School Data</a>
 <a href="State_Capture_One.html">State of Capture Part 1: Notes</a>
 <a href="Cars_SA.html">South African Car Prices</a>
+<a href="Food_Prices.html">South African Food Prices</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2339,7 +2370,9 @@ Posts
 <h1>Department of Basic Education: Schools Database</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>This post details the data scraping process for obtaining the schools database of from the Department of Basic Education in South Africa.</p></p>
+<p><p>This post details the data scraping process for obtaining the
+schools database of from the Department of Basic Education in South
+Africa.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2357,8 +2390,10 @@ Posts
 <li><a href="#introduction">INTRODUCTION</a>
 <ul>
 <li><a href="#data-scraping">DATA SCRAPING</a></li>
-<li><a href="#downloads-so-many-downloads.">DOWNLOADS, SO MANY DOWNLOADS.</a></li>
-<li><a href="#bring-your-brooms-cause-its-a-mess">BRING YOUR BROOMS CAUSE IT’S A MESS!</a></li>
+<li><a href="#downloads-so-many-downloads.">DOWNLOADS, SO MANY
+DOWNLOADS.</a></li>
+<li><a href="#bring-your-brooms-cause-its-a-mess">BRING YOUR BROOMS
+CAUSE IT’S A MESS!</a></li>
 </ul></li>
 <li><a href="#conclusion">CONCLUSION</a></li>
 <li><a href="#references">REFERENCES</a></li>
@@ -2366,9 +2401,24 @@ Posts
 </nav>
 </div>
 <h1 id="introduction">INTRODUCTION</h1>
-<p>A few years ago, I was a student pursuing Masters of Commerce degree. The topic had something to do with the relationship between Education, Labour and Business outcomes. My pursuit of the qualification is defunct. However, there are several artefacts worth writting up. In this post, we will discuss the South African Schools Database. The Department of Basic Education regularly publishes versions of the School Database including a number of notable variables such as the school’s location, contact information, number of learners and teachers etc. The data is published in a non-standardised matter. This makes it an interesting data wrangling task.</p>
+<p>A few years ago, I was a student pursuing Masters of Commerce degree.
+The topic had something to do with the relationship between Education,
+Labour and Business outcomes. My pursuit of the qualification is
+defunct. However, there are several artefacts worth writting up. In this
+post, we will discuss the South African Schools Database. The Department
+of Basic Education regularly publishes versions of the School Database
+including a number of notable variables such as the school’s location,
+contact information, number of learners and teachers etc. The data is
+published in a non-standardised matter. This makes it an interesting
+data wrangling task.</p>
 <h2 id="data-scraping">DATA SCRAPING</h2>
-<p>The first hurdle is the volume of files publised on the <a href="https://www.education.gov.za/Programmes/EMIS/EMISDownloads.aspx">DBE</a> website. It is possible to download all 200 files by hand and save them to a directory of your choosing. However, such a process would be tedious and error prone(speaking from experience, ofcourse). The R-Programming language is a perfect companion for this task. To download the files, we can use two important packages, rvest and xml2.</p>
+<p>The first hurdle is the volume of files publised on the <a
+href="https://www.education.gov.za/Programmes/EMIS/EMISDownloads.aspx">DBE</a>
+website. It is possible to download all 200 files by hand and save them
+to a directory of your choosing. However, such a process would be
+tedious and error prone(speaking from experience, ofcourse). The
+R-Programming language is a perfect companion for this task. To download
+the files, we can use two important packages, rvest and xml2.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='st'>"https://www.education.gov.za/Programmes/EMIS/EMISDownloads.aspx"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
@@ -2385,14 +2435,32 @@ Posts
 </code></pre>
 </div>
 </div>
-<p>Firstly, we specify the url on the read_html function. Thereafter, we use the html_elements function to point to the html tag of interest. In this case, we are interest in the “a” tag, specifically, the href (or link) attribute.</p>
-<p>We store the result in a data.frame object and use a regular expression to filter for values that start with a punctuation followed by “Link” and values that contain the term “forcedownload”. Finally, we append the path to file (our base url). The resulting data.frame contains all 200 downloadable files.</p>
+<p>Firstly, we specify the url on the read_html function. Thereafter, we
+use the html_elements function to point to the html tag of interest. In
+this case, we are interest in the “a” tag, specifically, the href (or
+link) attribute.</p>
+<p>We store the result in a data.frame object and use a regular
+expression to filter for values that start with a punctuation followed
+by “Link” and values that contain the term “forcedownload”. Finally, we
+append the path to file (our base url). The resulting data.frame
+contains all 200 downloadable files.</p>
 <h2 id="downloads-so-many-downloads.">DOWNLOADS, SO MANY DOWNLOADS.</h2>
-<p>With the links in hand, we can tackle the next hurdle, downloading the files. Usually, we could use the commandline to download the files. For example, the single command below.</p>
+<p>With the links in hand, we can tackle the next hurdle, downloading
+the files. Usually, we could use the commandline to download the files.
+For example, the single command below.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-i</span> some_text_file.txt</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-i</span> some_text_file.txt</span></code></pre></div>
 </div>
-<p>However, the DBE datasets are saved as either xlsx or xls format with a prompt on click to download the file. There are probably ways around this issue. Luckily, xml2 has a convenient function to handle this issue. In the code below, we use a for-loop to download each file in our dataset and save them in a specified sub folder. To avoid a break in the for-loop when an error occurs, we add the try function. As an add-on, we print a statement after each download. Depending on your internet connection speed and the website’s response time, this script can take five minutes to download all the files.</p>
+<p>However, the DBE datasets are saved as either xlsx or xls format with
+a prompt on click to download the file. There are probably ways around
+this issue. Luckily, xml2 has a convenient function to handle this
+issue. In the code below, we use a for-loop to download each file in our
+dataset and save them in a specified sub folder. To avoid a break in the
+for-loop when an error occurs, we add the try function. As an add-on, we
+print a statement after each download. Depending on your internet
+connection speed and the website’s response time, this script can take
+five minutes to download all the files.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'>for</span><span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>Data_Sets</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
@@ -2403,8 +2471,13 @@ Posts
 </code></pre>
 </div>
 </div>
-<h2 id="bring-your-brooms-cause-its-a-mess">BRING YOUR BROOMS CAUSE IT’S A MESS!</h2>
-<p>Another set of tasks to address is reading and cleaning the excel files. Using other software such as Excel or SPSS, these tasks would be cumbersome. Yet with R, Python or other programming languages, it possible handle more than one file at a time. Below, we use the readxl and purrr R packages to iteratively read and clean the files.</p>
+<h2 id="bring-your-brooms-cause-its-a-mess">BRING YOUR BROOMS CAUSE IT’S
+A MESS!</h2>
+<p>Another set of tasks to address is reading and cleaning the excel
+files. Using other software such as Excel or SPSS, these tasks would be
+cumbersome. Yet with R, Python or other programming languages, it
+possible handle more than one file at a time. Below, we use the readxl
+and purrr R packages to iteratively read and clean the files.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># All_Excel_Reader --------------------------------------------------------</span>
@@ -2438,16 +2511,45 @@ Posts
 </code></pre>
 </div>
 </div>
-<p>The resulting data.frame contains hundreds of thousands of rows and nearly 60 columns. Interestingly, most of these variable are effectively differing naming conventions such as emisno = natemis = oldnatemis = newnatemis. The insistent naming conventions extend to other variables such as gps coordinates and centre details. The spectacularly unoptimised script is available<a href="https://github.com/SivuyileNzimeni/DBE_Data/blob/main/Schools_Db_Cleaner.R">here</a>. The scraper script,cleaning script and downloaded xlsx files are all available on the <a href="https://github.com/SivuyileNzimeni/DBE_Data">this github report</a>.</p>
+<p>The resulting data.frame contains hundreds of thousands of rows and
+nearly 60 columns. Interestingly, most of these variable are effectively
+differing naming conventions such as emisno = natemis = oldnatemis =
+newnatemis. The insistent naming conventions extend to other variables
+such as gps coordinates and centre details. The spectacularly
+unoptimised script is available<a
+href="https://github.com/SivuyileNzimeni/DBE_Data/blob/main/Schools_Db_Cleaner.R">here</a>.
+The scraper script,cleaning script and downloaded xlsx files are all
+available on the <a
+href="https://github.com/SivuyileNzimeni/DBE_Data">this github
+report</a>.</p>
 <h1 id="conclusion">CONCLUSION</h1>
-<p>Using R to clean data is a wise choice. This post highlighted an example of implementation on a relatively small dataset. The final dataset can be used to match school performance reports regularly published by the Department of Basic Education.</p>
+<p>Using R to clean data is a wise choice. This post highlighted an
+example of implementation on a relatively small dataset. The final
+dataset can be used to match school performance reports regularly
+published by the Department of Basic Education.</p>
 <h1 id="references">REFERENCES</h1>
-<p>Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a></p>
-<p>Sam Firke (2021). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.1.0. <a href="https://CRAN.R-project.org/package=janitor" class="uri">https://CRAN.R-project.org/package=janitor</a></p>
-<p>Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. R package version 1.3.1. <a href="https://CRAN.R-project.org/package=readxl" class="uri">https://CRAN.R-project.org/package=readxl</a></p>
-<p>Jeroen Ooms (2021). writexl: Export Data Frames to Excel ‘xlsx’ Format. R package version 1.4.0. <a href="https://CRAN.R-project.org/package=writexl" class="uri">https://CRAN.R-project.org/package=writexl</a></p>
-<p>Hadley Wickham (2021). rvest: Easily Harvest (Scrape) Web Pages. R package version 1.0.2. <a href="https://CRAN.R-project.org/package=rvest" class="uri">https://CRAN.R-project.org/package=rvest</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Wickham et al., (2019). Welcome to the tidyverse. Journal of Open
+Source Software, 4(43), 1686, <a
+href="https://doi.org/10.21105/joss.01686"
+class="uri">https://doi.org/10.21105/joss.01686</a></p>
+<p>Sam Firke (2021). janitor: Simple Tools for Examining and Cleaning
+Dirty Data. R package version 2.1.0. <a
+href="https://CRAN.R-project.org/package=janitor"
+class="uri">https://CRAN.R-project.org/package=janitor</a></p>
+<p>Hadley Wickham and Jennifer Bryan (2019). readxl: Read Excel Files. R
+package version 1.3.1. <a
+href="https://CRAN.R-project.org/package=readxl"
+class="uri">https://CRAN.R-project.org/package=readxl</a></p>
+<p>Jeroen Ooms (2021). writexl: Export Data Frames to Excel ‘xlsx’
+Format. R package version 1.4.0. <a
+href="https://CRAN.R-project.org/package=writexl"
+class="uri">https://CRAN.R-project.org/package=writexl</a></p>
+<p>Hadley Wickham (2021). rvest: Easily Harvest (Scrape) Web Pages. R
+package version 1.0.2. <a
+href="https://CRAN.R-project.org/package=rvest"
+class="uri">https://CRAN.R-project.org/package=rvest</a></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

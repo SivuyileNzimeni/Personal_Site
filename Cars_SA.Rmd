@@ -204,8 +204,7 @@ Our model had an mean r-square of 0.62. Indicating that 62% of the variation in 
 ```{r Final_LM,echo=FALSE}
 test_lm <- lm(price~.,Car_Test)
 
-
-tab_model(test_lm,
+sjPlot::tab_model(test_lm,
           show.std = TRUE)
 
 ```
