@@ -2421,16 +2421,16 @@ R-Programming language is a perfect companion for this task. To download
 the files, we can use two important packages, rvest and xml2.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='st'>"https://www.education.gov.za/Programmes/EMIS/EMISDownloads.aspx"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>html_elements</span><span class='op'>(</span><span class='st'>"a"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='st'>"https://www.education.gov.za/Programmes/EMIS/EMISDownloads.aspx"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'>html_elements</span><span class='op'>(</span><span class='st'>"a"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
   <span class='fu'>html_attr</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"href"</span><span class='op'>)</span>
 
-<span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>dataset_links <span class='op'>=</span> <span class='va'>Data_Sets</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>dataset_links</span>,<span class='st'>"^[[:punct:]]Link"</span><span class='op'>)</span>,
-         <span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>dataset_links</span>,<span class='st'>"forcedownload"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>dataset_links <span class='op'>=</span> <span class='va'>Data_Sets</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect</a></span><span class='op'>(</span><span class='va'>dataset_links</span>,<span class='st'>"^[[:punct:]]Link"</span><span class='op'>)</span>,
+         <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_detect.html'>str_detect</a></span><span class='op'>(</span><span class='va'>dataset_links</span>,<span class='st'>"forcedownload"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='va'>Data_Sets</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>dataset_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"https://www.education.gov.za/Programmes/EMIS/EMISDownloads"</span>,
+<span class='va'>Data_Sets</span> <span class='op'>&lt;-</span> <span class='va'>Data_Sets</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>dataset_links <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"https://www.education.gov.za/Programmes/EMIS/EMISDownloads"</span>,
                                 <span class='va'>dataset_links</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2493,20 +2493,20 @@ and purrr R packages to iteratively read and clean the files.</p>
 <span class='co'># All_Masterlist ----------------------------------------------------------</span>
 <span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>master_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"./Schools_Db"</span>,
            full.names<span class='op'>=</span><span class='cn'>TRUE</span>,
-           pattern <span class='op'>=</span> <span class='st'>".xlsx"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>mutate</span><span class='op'>(</span>schools_db <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>master_list</span>,<span class='va'>all_excel</span><span class='op'>)</span><span class='op'>)</span>
+           pattern <span class='op'>=</span> <span class='st'>".xlsx"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>schools_db <span class='op'>=</span> <span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>master_list</span>,<span class='va'>all_excel</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>schools_db</span><span class='op'>)</span>
+<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span><span class='op'>(</span><span class='va'>schools_db</span><span class='op'>)</span>
 
 <span class='va'>EDU_Dbs</span><span class='op'>$</span><span class='va'>schools_db</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>EDU_Dbs</span><span class='op'>$</span><span class='va'>schools_db</span>,<span class='va'>sapply</span>,<span class='va'>as.character</span><span class='op'>)</span>
 
 <span class='va'>EDU_Dbs</span><span class='op'>$</span><span class='va'>schools_db</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>EDU_Dbs</span><span class='op'>$</span><span class='va'>schools_db</span>,<span class='va'>as.data.frame</span><span class='op'>)</span>
 
-<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>unnest</span><span class='op'>(</span><span class='va'>schools_db</span><span class='op'>)</span>
+<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span><span class='op'>(</span><span class='va'>schools_db</span><span class='op'>)</span>
 
-<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'>%&gt;%</span> 
+<span class='va'>EDU_Dbs</span> <span class='op'>&lt;-</span> <span class='va'>EDU_Dbs</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
   <span class='fu'>clean_names</span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
