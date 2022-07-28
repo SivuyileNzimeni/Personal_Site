@@ -6,4 +6,6 @@ The repository is built with R, Distill and Netlify.
 
 You can find more resources about the [Distill Package](https://rstudio.github.io/distill/) and a showcase of website built using the package [here](https://jhelvy.github.io/distillery/).
 
-  [] Port website to Quarto
+## TO DO LIST
+
+  1. Port website to Quarto
